@@ -1,9 +1,6 @@
 ﻿using DevIO.Api.ViewModels;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
-using System.Linq;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace DevIO.Api.Extensions
 {

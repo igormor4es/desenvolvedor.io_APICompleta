@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DevIO.Business.Intefaces;
 using System.Security.Claims;
-using DevIO.Business.Intefaces;
-using Microsoft.AspNetCore.Http;
 
 namespace DevIO.Api.Extensions
 {

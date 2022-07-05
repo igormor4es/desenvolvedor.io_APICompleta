@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.Json;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DevIO.Api.Controllers;
 using DevIO.Api.Extensions;
 using DevIO.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using DevIO.Business.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace DevIO.Api.V1.Controllers
 {
     [Authorize]
-    //[ApiVersion("1.0")]
+    [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/produtos")]
     public class ProdutosController : MainController
     {

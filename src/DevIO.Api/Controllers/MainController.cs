@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using DevIO.Business.Intefaces;
+﻿using DevIO.Business.Intefaces;
 using DevIO.Business.Notificacoes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -16,7 +14,8 @@ namespace DevIO.Api.Controllers
         protected Guid UsuarioId { get; set; }
         protected bool UsuarioAutenticado { get; set; }
 
-        protected MainController(INotificador notificador, IUser appUser)
+        protected MainController(INotificador notificador, 
+                                 IUser appUser)
         {
             _notificador = notificador;
             AppUser = appUser;

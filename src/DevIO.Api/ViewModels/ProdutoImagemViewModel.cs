@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using DevIO.Api.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevIO.Api.ViewModels
@@ -26,7 +24,7 @@ namespace DevIO.Api.ViewModels
         [StringLength(1000, ErrorMessage = "O campo {0} precisa ter entre {2} e {1} caracteres", MinimumLength = 2)]
         public string Descricao { get; set; }
 
-        //Evita o erro de conversão de string vazia para IFormFile
+        // Evita o erro de conversão de string vazia para IFormFile
         [JsonIgnore]        
         public IFormFile ImagemUpload { get; set; }
 

@@ -1,37 +1,44 @@
 using DevIO.Api.Configuration;
 using DevIO.Data.Context;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Configuration
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", true, true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
+    .AddEnvironmentVariables();
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// ConfigureServices
 
 builder.Services.AddDbContext<MeuDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddIdentityConfig(builder.Configuration);
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddApiConfig();
+
+builder.Services.AddSwaggerConfig();
+
+builder.Services.AddLoggingConfig(builder.Configuration);
+
 builder.Services.ResolveDependencies();
 
 var app = builder.Build();
+var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Configure
 
-app.UseHttpsRedirection();
+app.UseApiConfig(app.Environment);
 
-app.UseAuthorization();
+app.UseSwaggerConfig(apiVersionDescriptionProvider);
 
-app.MapControllers();
+app.UseLoggingConfiguration();
 
 app.Run();
